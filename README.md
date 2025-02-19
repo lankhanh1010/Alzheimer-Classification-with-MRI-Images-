@@ -1,4 +1,4 @@
-🧠 Alzheimer Classification with MRI Images
+#🧠 Alzheimer Classification with MRI Images
 In Memory of My Grandmother, Who Suffered from Alzheimer's ❤️
 
 This project explores Alzheimer's disease classification using MRI images by leveraging advanced deep learning techniques. The model classifies MRI scans into four distinct stages of Alzheimer's disease, potentially aiding healthcare professionals in early detection, monitoring disease progression, and optimizing patient care.
