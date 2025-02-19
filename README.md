@@ -5,6 +5,17 @@ This project explores **Alzheimer's disease classification using MRI images** by
 
 ---
 
+## 🛠 Tools & Technologies  
+- **Programming Language:** Python 🐍  
+- **Deep Learning Frameworks:**  
+  - **TensorFlow/Keras** – Transfer learning models  
+  - **Scikit-Learn** – Data preprocessing & evaluation  
+  - **NumPy & Pandas** – Data handling & analysis  
+- **Computing Environment:**  
+  - **Google Colab** – For model training  
+  - **Kaggle API** – Direct dataset access  
+---
+
 ## 📂 Dataset Overview  
 **Data Source:** *Best Alzheimer MRI dataset* (99% accuracy)  
 **Structure:**  
@@ -22,21 +33,13 @@ Each MRI image is labeled into one of the following categories:
 - Very Mild Demented: **448** samples  
 - Mild Demented: **179** samples  
 - Moderate Demented: **12** samples  
+![image](https://github.com/user-attachments/assets/db49491b-bf7a-403f-9461-461c00f80bc1)
+
 
 ⚠️ **Dataset Imbalance:**  
 The dataset is highly imbalanced, which could affect model performance. To address this, we apply **SMOTE (Synthetic Minority Oversampling Technique)** to balance the class distribution.
-
----
-
-## 🛠 Tools & Technologies  
-- **Programming Language:** Python 🐍  
-- **Deep Learning Frameworks:**  
-  - **TensorFlow/Keras** – Transfer learning models  
-  - **Scikit-Learn** – Data preprocessing & evaluation  
-  - **NumPy & Pandas** – Data handling & analysis  
-- **Computing Environment:**  
-  - **Google Colab** – For model training  
-  - **Kaggle API** – Direct dataset access  
+![image](https://github.com/user-attachments/assets/37bfa6f2-1b87-44cb-b0a5-dd0c181825c1)
+![image](https://github.com/user-attachments/assets/1d969ed2-bdbd-4c22-aeda-98f1879c369b)
 
 ---
 
