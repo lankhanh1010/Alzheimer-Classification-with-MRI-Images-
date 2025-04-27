@@ -1,44 +1,46 @@
 # 🧠 Alzheimer Classification with MRI Images  
-**In Memory of My Late Grandmother, who battled Alzheimer's ❤️**  
+In Memory of My Late Grandmother, who battled Alzheimer's
 
-This project explored **Alzheimer's disease classification using MRI images** by leveraging advanced **deep learning** techniques. The model classified MRI scans into four distinct stages of Alzheimer's disease, potentially aiding healthcare professionals in **early detection, monitoring disease progression, and optimizing patient care.**
+This project explored Alzheimer's disease classification using MRI images by leveraging advanced deep learning techniques. The model classified MRI scans into four distinct stages of Alzheimer's disease, potentially aiding healthcare professionals in early detection, monitoring disease progression, and optimizing patient care.
 
 ---
 
 ## 🛠 Tools & Technologies  
-- **Programming Language:** Python 🐍  
-- **Deep Learning Frameworks:**  
-  - **TensorFlow/Keras** – Transfer learning models  
-  - **Scikit-Learn** – Data preprocessing & evaluation  
-  - **NumPy & Pandas** – Data handling & analysis  
-- **Computing Environment:**  
-  - **Google Colab** – For model training  
-  - **Kaggle API** – Direct dataset access  
+- Programming Language: Python
+- Deep Learning Frameworks:
+  - TensorFlow/Keras – Transfer learning models  
+  - Scikit-Learn – Data preprocessing & evaluation  
+  - NumPy & Pandas – Data handling & analysis  
+- Computing Environment: 
+  - Google Colab – For model training  
 ---
 
 ## 📂 Dataset Overview  
-**Data Source:** *Best Alzheimer MRI dataset* (99% accuracy)  
-**Structure:**  
-- **Training Set:** Used for model training  
-- **Testing Set:** Used for evaluating performance  
+### 1️⃣ Data Source:**
+- Best Alzheimer MRI dataset (99% accuracy) 
+https://www.kaggle.com/datasets/lukechugh/best-alzheimer-mri-dataset-99-accuracy
 
-Each MRI image is labeled into one of the following categories:  
-- **Non-Demented:** Healthy brain images  
-- **Very Mild Demented:** Early signs of Alzheimer’s  
-- **Mild Demented:** Moderate progression  
-- **Moderate Demented:** Advanced stage  
+- Each MRI image is labeled into one of the following categories:  
+  - Non-Demented: Healthy brain images  
+  - Very Mild Demented: Early signs of Alzheimer’s  
+  - Mild Demented: Moderate progression  
+  - Moderate Demented: Advanced stage  
 
-📊 **Class Distribution (Before SMOTE):**  
-- Non-Demented: **640** samples  
-- Very Mild Demented: **448** samples  
-- Mild Demented: **179** samples  
-- Moderate Demented: **12** samples  
+### 2️⃣ **Class Distribution (Before SMOTE):**  
+- Non-Demented: 640 samples  
+- Very Mild Demented: 448 samples  
+- Mild Demented: 179 samples  
+- Moderate Demented: 12 samples
+  
 ![image](https://github.com/user-attachments/assets/db49491b-bf7a-403f-9461-461c00f80bc1)
 
 
-⚠️ **Dataset Imbalance:**  
-The dataset is highly imbalanced, which could affect model performance. To address this, we apply **SMOTE (Synthetic Minority Oversampling Technique)** to balance the class distribution.
-![image](https://github.com/user-attachments/assets/37bfa6f2-1b87-44cb-b0a5-dd0c181825c1)
+### 3️⃣ **Dataset Imbalance:**  
+The dataset was highly imbalanced, which could affect model performance. To address this, we applied SMOTE (Synthetic Minority Oversampling Technique) to balance the class distribution.
+
+![image](https://github.com/user-attachments/assets/b47d721c-16f9-49e4-a004-ae90f2794026)
+
+
 ![image](https://github.com/user-attachments/assets/1d969ed2-bdbd-4c22-aeda-98f1879c369b)
 
 ---
@@ -46,21 +48,18 @@ The dataset is highly imbalanced, which could affect model performance. To addre
 ## 🏗 Methodology  
 
 ### 1️⃣ **Baseline Training on Unbalanced Data**  
-- Train an initial model (**model_1**) on the raw, imbalanced dataset using **InceptionV3, ResNet152v2, and DenseNet201**.  
-- Extract **feature embeddings (Zcode)** from trained models.  
+- The first step involved training a base model using InceptionV3, ResNet152v2, and DenseNet201 with the given imbalance dataset.
+- Extracted feature embeddings (Zcode) from the trained models, forming Zcode_training and Zcode_testing
+
 
 ### 2️⃣ **SMOTE Application for Class Balancing**  
-- **Feature-Level Balancing:** SMOTE is applied on extracted **Zcode embeddings** instead of raw images.  
-- **New Balanced Dataset:** Each class is upsampled to **2560** samples, ensuring equal representation.  
+- Instead of generating synthetic images, SMOTE was applied to Zcode_training and Zcode_testing to balance class distributions.
+- The training dataset was adjusted to ensure that each category contained the same number of samples (2560 samples).
+
 
 ### 3️⃣ **Final Model Training on Balanced Data**  
-- Train a **new classifier** on the SMOTE-balanced dataset using **Zcode embeddings** from step 2.  
-- Evaluate performance on original test data.  
-
-📌 **Why Feature-Level SMOTE?**  
-- Avoids **artificially creating MRI images**  
-- Retains important patterns from the **original dataset**  
-- **Reduces computation cost** and enhances model generalization  
+- The final classifier was trained using the SMOTE-balanced dataset with extracted features from step 2.
+- Evaluated performance using test data without SMOTE to measure real-world applicability.
 
 ---
 
@@ -71,13 +70,13 @@ The dataset is highly imbalanced, which could affect model performance. To addre
 | Part | Computing Unit | Purpose |
 |------|--------------|---------|
 | **Part 1** | L4 GPU | Train & test base model on unbalanced data |
-| **Part 2** | L4 GPU | Extract **Zcode** (features) from model_1 |
-| **Part 3** | L4 GPU | Apply **SMOTE** to Zcode features |
+| **Part 2** | L4 GPU | Extract Zcode from model_1 |
+| **Part 3** | L4 GPU | Apply SMOTE to Zcode features |
 | **Part 4** | TPU v2-8 | Train & test classifier on balanced dataset |
 
 ### 📂 **Saved Models & Variables**  
 
-#### ✅ **Models (Before & After SMOTE)**  
+#### 1️⃣ **Models (Before & After SMOTE)**  
 | Transfer Learning Model | Dataset | Saved Model Name |
 |------------------------|------------------|------------------|
 | **InceptionV3** | Before SMOTE | `Inception_model_1` |
@@ -87,7 +86,7 @@ The dataset is highly imbalanced, which could affect model performance. To addre
 | **ResNet152v2** | Before SMOTE | `ResNet152V2_model_1` |
 |  | After SMOTE | `ResNet152V2_classifier_model` |
 
-#### 📊 **Stored Variables for Training**  
+#### 2️⃣ **Stored Variables for Training**  
 - **Part 2 (Feature Extraction)**  
   - `Zcode_training` – Extracted training features  
   - `Zcode_training_noshuffle` – Unshuffled version  
@@ -103,7 +102,7 @@ The dataset is highly imbalanced, which could affect model performance. To addre
 | Part | Computing Unit | Load Models/Variables |
 |------|--------------|-----------------------|
 | **Part 1** | L4 GPU | No pre-loaded models required |
-| **Part 2** | L4 GPU | Load model_1 (`.keras`) from **before SMOTE** |
+| **Part 2** | L4 GPU | Load model_1 (`.keras`) from before SMOTE |
 | **Part 3** | L4 GPU | Load feature extractions (`Zcode_training`, etc.) |
 | **Part 4** | TPU v2-8 | Load balanced dataset & extracted features |
 
@@ -111,14 +110,7 @@ The dataset is highly imbalanced, which could affect model performance. To addre
 - GPU/TPU selection matches each notebook part.
 - Saved models (`.keras`) and variables (`.npy`) are in an accessible directory.
 
----
+This project contributes towards advancing AI-driven early detection of Alzheimer's disease, with potential applications in medical imaging diagnostics.  
 
-## 🎯 Key Takeaways  
-✅ **Deep learning** with **MRI-based classification** can assist in detecting Alzheimer's progression.  
-✅ **SMOTE-enhanced feature balancing** improves model fairness & performance.  
-✅ **Structured notebook execution** ensures reproducibility.  
-
-This project contributes towards **advancing AI-driven early detection** of Alzheimer's disease, with potential applications in medical imaging diagnostics.  
-
-💙 *Dedicated to all families affected by Alzheimer’s.*  
+*Dedicated to all families affected by Alzheimer’s.*  
 
